@@ -1,0 +1,14 @@
+{%extends 'base.html'%}
+
+{%block content%}
+{% if user.is_authenticated %}
+<p>Вы уже выполнили вход.</p>
+{% else %}
+<form method="post" action="{% url 'login' %}" >
+   {% csrf_token %}
+   {{ form.as_p }} 
+<button type="submit">подтвердить</button>
+
+</form>
+{% endif %}
+{%endblock%}
