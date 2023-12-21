@@ -1,0 +1,34 @@
+{%extends 'base.html'%}
+
+{%block content%}
+    
+    {% if user.is_authenticated %}
+    <form method="post" action="{% url 'createcomment' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <ul>
+        {%for a in form%}
+        {%if a.name == "com_author"%}
+        <select hidden name="com_author" required="" id="id_com_author">
+            <option value="{{user.id}}">{{user.name}}</option>
+          
+          </select>
+        {%elif a.name == "com_post" %}{{id}}{{post_id}}
+        <select hidden name="com_post" required="" id="com_post">
+            <option value="{{request.GET.post_id}}">{{request.GET.post_id}}</option>
+          
+          </select>
+          {{pk}}
+        {%else%}
+         <li>{{a}}{{a.name}}</li>
+         {%endif%}
+        {%endfor%}
+
+    </ul>
+        {{pk}}
+     <button type="submit">подтвердить</button>
+     
+     </form>
+    {% else %}
+     Нужно выполнить вход
+    {% endif %}
+{%endblock%}

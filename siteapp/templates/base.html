@@ -12,7 +12,7 @@
 </head>
 <body>
     {%block content%}
-    
+
     {%endblock%}
 <nav>
     <ul>
@@ -23,6 +23,7 @@
     {%if user.is_authenticated%}
     <li><a href="{%url 'logout'%}">выйти</a></li>
     <a href="{%url 'createpost'%}">Создать пост</a>
+    <li><a href="{%url 'updateprofile' user.id %}">обновить профиль</a></li>
 
     {%else%}
     <li><a href="{%url 'login'%}">войти</a></li>

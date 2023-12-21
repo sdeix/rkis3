@@ -7,11 +7,12 @@
 
 {% if post_list %}
     {%for a in post_list%}
+    <a href="{%url 'detail' a.id %}">
     <div class="post">
         {{a.title}}-- {{a.post_author}}
-        <div>{{a.post_text}}</div>
-    </div>
 
+    </div>
+    </a>
     {%endfor%}
 {%endif%}
 

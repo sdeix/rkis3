@@ -22,6 +22,10 @@ class Post(models.Model):
     post_text = models.TextField('текст поста',max_length=300)
     post_author = models.ForeignKey(User,verbose_name='автор поста', on_delete=models.CASCADE)
 
+    def comments(self):
+        comms = Comment.objects.filter(com_post=self)
+        return comms
+
     def __str__(self):
         return self.title
     

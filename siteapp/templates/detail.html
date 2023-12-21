@@ -1,0 +1,27 @@
+{%extends 'base.html'%}
+
+{%block content%}
+{%load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{{user.name}}
+
+
+
+    <div class="post">
+        {{post.title}}-- {{post.post_author}}
+        <div>{{post.post_text}}</div>
+        <a href="{%url 'createcomment' %}?post_id={{post.id}}">написать комментарий</a>
+        <br>
+        {%for com in post.comments%}
+        {{com.com_text}}
+        {{com.com_author}}
+        {{com.com_post}}
+        <br>
+        {%endfor%}
+
+    </div>
+
+
+
+
+{%endblock%}
