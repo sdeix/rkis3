@@ -4,21 +4,34 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {%load static%}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     {%block title%}
     <title>сайт</title>
     {%endblock%}
 </head>
 <body>
     {%block content%}
-
+    
     {%endblock%}
-    {%if user.is_authenticated%}
-    <a href="{%url 'logout'%}">выйти</a>
-    {%else%}
-    <a href="{%url 'login'%}">войти</a>
-    <a href="{%url 'signup'%}">регистрация</a>
-    {%endif%}
+<nav>
+    <ul>
 
+
+    
+    <li><a href="{%url 'index'%}">главная страница</a></li>
+    {%if user.is_authenticated%}
+    <li><a href="{%url 'logout'%}">выйти</a></li>
+    <a href="{%url 'createpost'%}">Создать пост</a>
+
+    {%else%}
+    <li><a href="{%url 'login'%}">войти</a></li>
+    <li><a href="{%url 'signup'%}">регистрация</a></li>
+
+    
+    {%endif%}
+</ul>
+</nav>
 
 </body>
 </html>

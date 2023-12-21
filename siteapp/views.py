@@ -1,11 +1,10 @@
 from django.shortcuts import render
 from django.views.generic import ListView,CreateView, DetailView
 from django.contrib.auth.views import LoginView,LogoutView
-from .forms import CreateUserForm
+from .forms import CreateUserForm, CreatePostForm
 from django.urls import reverse_lazy
+from .models import Post, Comment
 
-def index(request):
-    return render(request,'index.html')
 
 
 class SignUp(CreateView):
@@ -18,3 +17,13 @@ class Login(LoginView):
 
 class Logout(LogoutView):
     template_name = 'register/logout.html'
+
+
+class Index(ListView):
+    model = Post
+    template_name = 'index.html'
+
+class CreatePost(CreateView):
+    form_class = CreatePostForm
+    success_url = reverse_lazy('index')
+    template_name = 'createpost.html'

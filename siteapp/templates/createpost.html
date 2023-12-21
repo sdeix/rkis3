@@ -1,0 +1,28 @@
+{%extends 'base.html'%}
+
+{%block content%}
+    
+    {% if user.is_authenticated %}
+    <form method="post" action="{% url 'createpost' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <ul>
+        {%for a in form%}
+        {%if a.name == "post_author"%}
+        <select hidden name="post_author" required="" id="id_post_author">
+            <option value="{{user.id}}">{{user.name}}</option>
+          
+          </select>
+        {%else%}
+         <li>{{a}}{{a.name}}</li>
+         {%endif%}
+        {%endfor%}
+
+    </ul>
+        
+     <button type="submit">подтвердить</button>
+     
+     </form>
+    {% else %}
+     Нужно выполнить вход
+    {% endif %}
+{%endblock%}

@@ -1,1 +1,18 @@
 {%extends 'base.html'%}
+
+{%block content%}
+{%load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{{user.name}}
+
+{% if post_list %}
+    {%for a in post_list%}
+    <div class="post">
+        {{a.title}}-- {{a.post_author}}
+        <div>{{a.post_text}}</div>
+    </div>
+
+    {%endfor%}
+{%endif%}
+
+{%endblock%}

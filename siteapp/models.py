@@ -17,12 +17,18 @@ class User(AbstractUser):
     class Meta(AbstractUser.Meta):
         pass
 
-class Post:
+class Post(models.Model):
     title = models.CharField('заголовок поста',max_length=30)
     post_text = models.TextField('текст поста',max_length=300)
     post_author = models.ForeignKey(User,verbose_name='автор поста', on_delete=models.CASCADE)
 
-class Comment:
+    def __str__(self):
+        return self.title
+    
+
+class Comment(models.Model):
     com_text = models.TextField('текст комментария',max_length=200)
     com_author = models.ForeignKey('User',verbose_name='автор комментария', on_delete=models.CASCADE)
     com_post = models.ForeignKey('Post',verbose_name="пост", on_delete=models.CASCADE)
+    def __str__(self):
+        return self.com_author
