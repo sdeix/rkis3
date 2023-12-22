@@ -10,12 +10,23 @@
     <div class="post">
         {{post.title}}-- {{post.post_author}}
         <div>{{post.post_text}}</div>
+        {% load static %}
+        <p><img class="img" src="{{post.post_img.url}}" alt=""></p>
         <a href="{%url 'createcomment' %}?post_id={{post.id}}">написать комментарий</a>
         <br>
+
         {%for com in post.comments%}
+        <div class="comm">
+
+        Автор комментария: {{com.com_author}}<br>
         {{com.com_text}}
-        {{com.com_author}}
-        {{com.com_post}}
+                    <p><img class="img" src="{{com.com_img.url}}" alt=""></p>
+        {%if com.com_author.id == user.id %}
+            <br>
+        <a href="{%url 'updatecomment' com.id %}">изменить комментарий</a>
+            <a href="{%url 'deletecomment' com.id %}">удалить комментарий</a>
+        {%endif%}
+        </div>
         <br>
         {%endfor%}
 

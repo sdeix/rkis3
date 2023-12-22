@@ -10,7 +10,7 @@
         {%if a.name == "post_author"%}
         <select hidden name="post_author" required="" id="id_post_author">
             <option value="{{user.id}}">{{user.name}}</option>
-          
+
           </select>
         {%else%}
          <li>{{a}}{{a.name}}</li>

@@ -10,6 +10,8 @@ urlpatterns = [
     path('updateprofile/<int:pk>/',views.UpdateProfile.as_view(),name='updateprofile'),
     path('detail/<int:pk>/',views.DetailPost.as_view(),name='detail'),
     path('createcomment/',views.CreateComment.as_view(),name='createcomment'),
+    path('updatecomment/<int:pk>/',views.UpdateComment.as_view(),name='updatecomment'),
+    path('<int:pk>/deletecomment', views.DeleteComment.as_view(), name='deletecomment'),
 
     # path('post/<int:pk>',)
 ]

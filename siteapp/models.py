@@ -19,9 +19,15 @@ class User(AbstractUser):
 
 class Post(models.Model):
     title = models.CharField('заголовок поста',max_length=30)
-    post_text = models.TextField('текст поста',max_length=300)
-    post_author = models.ForeignKey(User,verbose_name='автор поста', on_delete=models.CASCADE)
 
+
+    def validate_image(value):
+        size_limit = 2*1024*1024
+        if value.size > size_limit:
+            raise forms.ValidationError("размер файла не должен превышать 2Mb")
+    post_img = models.FileField("изображение поста",upload_to='posts/',blank=True,validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'bmp'])])
+    post_author = models.ForeignKey(User, verbose_name='автор поста', on_delete=models.CASCADE)
+    post_text = models.TextField('текст поста', max_length=300)
     def comments(self):
         comms = Comment.objects.filter(com_post=self)
         return comms
@@ -31,8 +37,16 @@ class Post(models.Model):
     
 
 class Comment(models.Model):
+    com_img = models.ImageField("изображение комментария",upload_to='comments/',blank=True,validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'bmp'])])
     com_text = models.TextField('текст комментария',max_length=200)
     com_author = models.ForeignKey('User',verbose_name='автор комментария', on_delete=models.CASCADE)
     com_post = models.ForeignKey('Post',verbose_name="пост", on_delete=models.CASCADE)
+    def validate_image(value):
+        size_limit = 2*1024*1024
+        if value.size > size_limit:
+            raise forms.ValidationError("размер файла не должен превышать 2Mb")
+
+
+
     def __str__(self):
         return self.com_author

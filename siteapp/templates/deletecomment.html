@@ -1,0 +1,13 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+  <h1>Удалить комментарий</h1>
+
+  <p>Удаление комментария </p>
+
+  <form action="" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Да, удалить." />
+  </form>
+{%endblock%}
